@@ -24,7 +24,7 @@ pipeline {
             //when { branch 'main' } 
             steps{
                 script {  //using scripts here is a hybrid approach
-                    withAWS(credentials: 'aws-auth'){
+                    withAWS(region: 'us-east-1',credentials: 'aws-auth'){
                         sh '''
                             cd 00-vpc
                             terraform init
@@ -36,7 +36,7 @@ pipeline {
         stage('Plan'){ // This is a test stage
             steps {
                 script {
-                    withAWS(credentials: 'aws-auth'){
+                    withAWS(region: 'us-east-1',credentials: 'aws-auth'){
                         sh '''
                             cd 00-vpc
                             terraform plan
@@ -56,7 +56,7 @@ pipeline {
             }
             steps {
                 script {
-                    withAWS(credentials: 'aws-auth'){
+                    withAWS(region: 'us-east-1',credentials: 'aws-auth'){
                         sh '''
                             cd 00-vpc
                             terraform apply -auto-approve
