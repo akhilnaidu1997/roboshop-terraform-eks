@@ -26,7 +26,7 @@ pipeline {
                 script {  //using scripts here is a hybrid approach
                     withAWS(region: 'us-east-1',credentials: 'aws-auth'){
                         sh '''
-                            cd 00-vpc
+                            cd 10-sg
                             terraform init
                         '''
                     }
@@ -38,7 +38,7 @@ pipeline {
                 script {
                     withAWS(region: 'us-east-1',credentials: 'aws-auth'){
                         sh '''
-                            cd 00-vpc
+                            cd 10-sg
                             terraform plan
                         '''
                     }
@@ -58,17 +58,10 @@ pipeline {
                 script {
                     withAWS(region: 'us-east-1',credentials: 'aws-auth'){
                         sh '''
-                            cd 00-vpc
+                            cd 10-sg
                             terraform apply -auto-approve
                         '''
                     }
-                }
-            }
-        }
-        stage('Trigger Second Job') {
-            steps {
-                script {
-                    build job: '10-sg', wait: false, propogate: false
                 }
             }
         }
