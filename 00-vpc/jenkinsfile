@@ -74,7 +74,7 @@ pipeline {
         }
         } 
         
-    }
+
     post {
         always {
             echo 'I will say hello again regardless of build result'
@@ -96,4 +96,5 @@ pipeline {
             echo "I will run this if pipeline status is changed"
         }
     }
+}
 
