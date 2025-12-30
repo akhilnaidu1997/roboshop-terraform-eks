@@ -25,10 +25,10 @@ pipeline {
             steps{
                 script {  //using scripts here is a hybrid approach
                     withAWS(credentials: 'aws-auth'){
-                        sh """
+                        sh '''
                             cd 00-vpc
                             terraform init
-                        """
+                        '''
                     }
                 }
             }
@@ -37,10 +37,10 @@ pipeline {
             steps {
                 script {
                     withAWS(credentials: 'aws-auth'){
-                        sh """
+                        sh '''
                             cd 00-vpc
                             terraform plan
-                        """
+                        '''
                     }
                 }
             }
@@ -57,10 +57,10 @@ pipeline {
             steps {
                 script {
                     withAWS(credentials: 'aws-auth'){
-                        sh """
+                        sh '''
                             cd 00-vpc
                             terraform apply -auto-approve
-                        """
+                        '''
                     }
                 }
             }
