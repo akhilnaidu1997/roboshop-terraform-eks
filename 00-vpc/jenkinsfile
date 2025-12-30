@@ -68,7 +68,7 @@ pipeline {
         stage('Trigger Second Job') {
             steps {
                 script {
-                    build job: '10-sg', wait: false, propogate: false
+                    build job: '10-sg', wait: false, propagate: false
                 }
             }
         }
