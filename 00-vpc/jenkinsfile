@@ -26,6 +26,8 @@ pipeline {
                 script {  //using scripts here is a hybrid approach
                     withAWS(region: 'us-east-1',credentials: 'aws-auth'){
                         sh '''
+                            pwd
+                            ls -l
                             cd 00-vpc
                             terraform init
                         '''
