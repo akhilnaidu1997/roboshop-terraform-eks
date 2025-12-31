@@ -12,13 +12,6 @@ pipeline {
     environment {
         COURSE = "DevOps"
     }
-    // parameters {
-    //     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-    //     text(name: 'BIOGRAPHY', defaultValue: '', description: 'Enter some information about the person')
-    //     booleanParam(name: 'TOGGLE', defaultValue: true, description: 'Toggle this value')
-    //     choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
-    //     password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
-    // }
     stages {
         stage('Init') { // This is build stage as example
             //when { branch 'main' } 
@@ -26,7 +19,7 @@ pipeline {
                 script {  //using scripts here is a hybrid approach
                     withAWS(region: 'us-east-1',credentials: 'aws-auth'){
                         sh '''
-                            cd 00-vpc
+                            cd 20-bastion
                             terraform init
                         '''
                     }
@@ -38,7 +31,7 @@ pipeline {
                 script {
                     withAWS(region: 'us-east-1',credentials: 'aws-auth'){
                         sh '''
-                            cd 00-vpc
+                            cd 20-bastion
                             terraform plan
                         '''
                     }
@@ -53,26 +46,19 @@ pipeline {
             //     parameters {
             //         string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
             //     }
-            }
             steps {
                 script {
                     withAWS(region: 'us-east-1',credentials: 'aws-auth'){
                         sh '''
-                            cd 00-vpc
+                            cd 20-bastion
                             terraform apply -auto-approve
                         '''
                     }
                 }
             }
         }
-        stage('Trigger Second Job') {
-            steps {
-                script {
-                    build job: '10-sg', wait: false, propagate: false
-                }
-            }
-        }
-        } 
+    
+    } 
         
 
     post {
