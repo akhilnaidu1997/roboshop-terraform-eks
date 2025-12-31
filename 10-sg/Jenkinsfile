@@ -84,7 +84,7 @@ pipeline {
                 stage('70-acm') {
                     steps {
                         script {
-                            build job: '70-acm', wait: false, propagate: false
+                            build job: '70-acm', wait: true, propagate: false
                         }
                     }
                 }
