@@ -2,7 +2,7 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 21.0"
 
-  name               = "roboshop"
+  name               = "roboshop-dev"
   kubernetes_version = "1.32"
 
   addons = {
