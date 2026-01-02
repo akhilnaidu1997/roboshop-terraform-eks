@@ -47,7 +47,7 @@ resource "terraform_data" "terraform" {
 }
 
 # 1️⃣ Create IAM Role
-resource "aws_iam_role" "bastion_role" {
+resource "aws_iam_role" "bastion_role-1" {
   name = "bastion-role"
 
   assume_role_policy = jsonencode({
