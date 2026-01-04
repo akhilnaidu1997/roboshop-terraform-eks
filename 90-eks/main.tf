@@ -36,7 +36,7 @@ module "eks" {
     blue = {
       # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
       ami_type       = "AL2023_x86_64_STANDARD"
-      instance_types = ["m5.xlarge"]
+      instance_types = ["t3.medium"]
       iam_role_additional_policies = {
         AmazonEBS = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
         AmazoneEFS = "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
@@ -50,7 +50,7 @@ module "eks" {
     # green = {
     #   # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
     #   ami_type       = "AL2023_x86_64_STANDARD"
-    #   instance_types = ["m5.xlarge"]
+    #   instance_types = ["t3.medium"]
     #   iam_role_additional_policies = {
     #     AmazonEBS = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
     #     AmazoneEFS = "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
