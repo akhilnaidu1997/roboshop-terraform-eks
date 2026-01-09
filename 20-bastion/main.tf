@@ -71,7 +71,7 @@ resource "aws_iam_role_policy_attachment" "admin_attach" {
 }
 
 # 3️⃣ Create IAM Instance Profile (needed to attach role to EC2)
-resource "aws_iam_instance_profile" "bastion_profile" {
+resource "aws_iam_instance_profile" "bastion_profile-1" {
   name = "terraform-admin-profile"
   role = aws_iam_role.bastion_role.name
 }
