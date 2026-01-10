@@ -23,7 +23,7 @@ resource "aws_lb_target_group" "roboshop" {
 
   health_check {
     interval = 10 # Time between health checks (in seconds)
-    path = "/health" # Endpoint to check
+    path = "/" # Endpoint to check
     protocol = "HTTP" # Protocol for health checks
     timeout = 5 # Timeout for each health check
     healthy_threshold = 2 # Consecutive successes to mark healthy
