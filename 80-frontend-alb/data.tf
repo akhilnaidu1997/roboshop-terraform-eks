@@ -11,3 +11,6 @@ data "aws_route53_zone" "zone_id" {
 data "aws_ssm_parameter" "certificate_arn" {
     name = "/${var.project}/${var.environment}-cert-arn"
 }
+data "aws_ssm_parameter" "vpc_id" {
+name = "/${var.project}/${var.environment}/vpc_id"
+}

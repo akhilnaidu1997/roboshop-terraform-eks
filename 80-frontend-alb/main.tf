@@ -14,6 +14,24 @@ resource "aws_lb" "frontend_alb" {
   )
 }
 
+resource "aws_lb_target_group" "roboshop" {
+  name        = "${local.common_name_suffix}"
+  port        = 8080
+  protocol    = "HTTP"
+  vpc_id      = local.vpc_id
+  target_type = "ip"
+
+  health_check {
+    interval = 10 # Time between health checks (in seconds)
+    path = "/health" # Endpoint to check
+    protocol = "HTTP" # Protocol for health checks
+    timeout = 5 # Timeout for each health check
+    healthy_threshold = 2 # Consecutive successes to mark healthy
+    unhealthy_threshold = 2 # Consecutive failures to mark unhealthy
+    matcher = "200-299" # HTTP response codes indicating success
+  }
+}
+
 resource "aws_lb_listener" "front_end" {
   load_balancer_arn = aws_lb.frontend_alb.arn
   port              = "443"
@@ -30,6 +48,22 @@ resource "aws_lb_listener" "front_end" {
       status_code  = "200"
     }
 
+  }
+}
+
+resource "aws_lb_listener_rule" "catalogue" {
+  listener_arn = aws_lb_listener.front_end.arn
+  priority     = 10
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.roboshop.arn
+  }
+
+  condition {
+    host_header {
+      values = ["${var.environment}.${var.domain}"]
+    }
   }
 }
 
