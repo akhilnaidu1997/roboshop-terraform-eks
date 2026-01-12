@@ -19,8 +19,9 @@ resource "aws_lb_target_group" "roboshop" {
   port        = 8080
   protocol    = "HTTP"
   vpc_id      = local.vpc_id
+  #target_type = "ip"
   target_type = "ip"
-
+  
   health_check {
     interval = 10 # Time between health checks (in seconds)
     path = "/" # Endpoint to check
