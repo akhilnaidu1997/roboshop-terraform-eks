@@ -4,7 +4,7 @@ resource "aws_instance" "bastion" {
   vpc_security_group_ids = [ local.bastion ]
   subnet_id = local.public_subnet_ids
   user_data = file("bastion.sh")
-  iam_instance_profile = aws_iam_instance_profile.bastion_profile.name
+  iam_instance_profile = aws_iam_instance_profile.bastion_profile-1.name
 
   root_block_device {
     volume_size = 50
